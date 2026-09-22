@@ -26,6 +26,19 @@ The CatBoost product is distributed with a per-pixel predictive uncertainty laye
 estimated by the model itself, so that users can tell where the prediction is well
 constrained and where it is not.
 
+## Mapped products
+
+![Predicted canopy height over the forests of the Romanian Carpathian arc, from 3 to 49 metres](docs/assets/canopy-height.webp)
+
+*Predicted canopy height, 3–49 m.*
+
+![Predicted aboveground biomass over the forests of the Romanian Carpathian arc, from 25 to 498 megagrams per hectare](docs/assets/biomass.webp)
+
+*Predicted aboveground biomass, 25–498 Mg ha⁻¹.*
+
+Provisional output of the current model generation. The figures will be replaced with
+the published version on release.
+
 ## Dataset specification
 
 *Provisional — values marked (†) may still change before release.*
@@ -39,6 +52,7 @@ constrained and where it is not.
 | **Format** | Cloud-Optimized GeoTIFF (COG) † |
 | **No-data** | NaN |
 | **Bands per product** | 1 — predicted value · 2 — predictive standard deviation (CatBoost product only) |
+| **Value range** | Canopy height 3–49 m; biomass 25–498 Mg ha⁻¹ |
 | **Reference period** | 2025 |
 | **Forest definition** | Dynamic World derived forest mask |
 | **Model families** | Random forest, XGBoost, CatBoost, convolutional neural network † |

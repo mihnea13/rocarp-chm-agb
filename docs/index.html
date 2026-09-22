@@ -109,6 +109,12 @@ ol.tl li.done::before{background:var(--accent); border-color:var(--accent)}
 .tl-when{display:block; font-size:13px; font-weight:650; color:var(--ink-3); letter-spacing:.03em; text-transform:uppercase; margin-bottom:1px}
 .tl-what{font-size:16px}
 
+/* ---------- figures ---------- */
+figure{margin:0 0 24px}
+figure img{display:block; width:100%; height:auto; background:#fff; border:1px solid var(--line); border-radius:10px}
+figcaption{margin-top:9px; font-size:14.5px; line-height:1.45; color:var(--ink-3)}
+.note{font-size:14.5px; color:var(--ink-3)}
+
 /* ---------- sources ---------- */
 ul.src{list-style:none; margin:0; padding:0}
 ul.src li{padding:9px 0; border-bottom:1px solid var(--line-soft); font-size:15.5px; color:var(--ink-2)}
@@ -177,6 +183,19 @@ footer p{margin:0 0 6px}
 </section>
 
 <section>
+  <h2>Mapped products</h2>
+  <figure>
+    <a href="assets/canopy-height.webp"><img src="assets/canopy-height.webp" width="1600" height="1078" alt="Map of predicted canopy height over the forests of the Romanian Carpathian arc, from 3 to 49 metres."></a>
+    <figcaption>Predicted canopy height, 3–49 m.</figcaption>
+  </figure>
+  <figure>
+    <a href="assets/biomass.webp"><img src="assets/biomass.webp" width="1600" height="1078" loading="lazy" alt="Map of predicted aboveground biomass over the forests of the Romanian Carpathian arc, from 25 to 498 megagrams per hectare."></a>
+    <figcaption>Predicted aboveground biomass, 25–498 Mg ha⁻¹.</figcaption>
+  </figure>
+  <p class="note">Provisional output of the current model generation. The figures will be replaced with the published version on release.</p>
+</section>
+
+<section>
   <h2>Dataset specification</h2>
   <dl class="spec">
     <div><dt>Variables</dt><dd>Canopy height (m); aboveground biomass (Mg ha⁻¹)</dd></div>
@@ -185,6 +204,7 @@ footer p{margin:0 0 6px}
     <div><dt>Extent</dt><dd>Forests of the Romanian Carpathian arc</dd></div>
     <div><dt>Format</dt><dd>Cloud-Optimized GeoTIFF, <code>NaN</code> no-data</dd></div>
     <div><dt>Bands</dt><dd>1 — predicted value<br>2 — predictive standard deviation <span style="color:var(--ink-3)">(CatBoost product only)</span></dd></div>
+    <div><dt>Value range</dt><dd>Canopy height 3–49 m<br>Biomass 25–498 Mg ha⁻¹</dd></div>
     <div><dt>Reference period</dt><dd>2025</dd></div>
     <div><dt>Forest definition</dt><dd>Dynamic World derived forest mask</dd></div>
     <div><dt>Licence</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd></div>
