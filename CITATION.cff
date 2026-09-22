@@ -10,8 +10,8 @@ abstract: >-
 type: dataset
 version: "0.1.0-pre"
 license: CC-BY-4.0
-url: "https://GITHUB-USER.github.io/rocarp-chm-agb/"
-repository-code: "https://github.com/GITHUB-USER/rocarp-chm-agb"
+url: "https://mihnea13.github.io/rocarp-chm-agb/"
+repository-code: "https://github.com/mihnea13/rocarp-chm-agb"
 keywords:
   - canopy height
   - aboveground biomass

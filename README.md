@@ -7,7 +7,7 @@
 > accompanying peer-reviewed publication. This repository is the permanent entry
 > point: the download links and the dataset DOI will appear here.
 >
-> **Landing page:** https://GITHUB-USER.github.io/rocarp-chm-agb/
+> **Landing page:** https://mihnea13.github.io/rocarp-chm-agb/
 
 ---
 

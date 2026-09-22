@@ -18,5 +18,6 @@ venv/
 Thumbs.db
 desktop.ini
 
-# QR output (regenerate with tools/make_qr.py)
-qr/
+
+# Preview copy delivered in chat - the real page is docs/index.html
+rocarp-landing-page-preview.html
