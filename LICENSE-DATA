@@ -1,0 +1,42 @@
+# Licence for the data products
+
+The RoCarp-CHM-AGB data products — the canopy height and aboveground biomass
+raster layers and their accompanying uncertainty layers — are licensed under the
+Creative Commons Attribution 4.0 International Licence (CC BY 4.0).
+
+    https://creativecommons.org/licenses/by/4.0/
+
+You are free to share and adapt the material for any purpose, including
+commercially, provided you give appropriate credit, provide a link to the
+licence, and indicate if changes were made.
+
+## Required attribution
+
+    Cățeanu, M. & Oniga, V.-E. (2027). RoCarp-CHM-AGB: canopy height and
+    aboveground biomass of the Romanian Carpathian forests at 10 m [Data set].
+    Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX
+
+## Attribution inherited from the input data
+
+The products are derived from third-party data whose own attribution
+requirements pass through to any use of this dataset:
+
+  - GEDI L2A and L4A — NASA Global Ecosystem Dynamics Investigation,
+    distributed by the LP DAAC and the ORNL DAAC.
+  - Sentinel-1 and Sentinel-2 — contains modified Copernicus Sentinel data
+    (2024–2025), processed by the authors.
+  - ALOS-2 PALSAR-2 yearly mosaic — © JAXA/METI. Cite Shimada, M., Itoh, T.,
+    Motooka, T., Watanabe, M., Shiraishi, T., Thapa, R. & Lucas, R. (2014).
+    New global forest/non-forest maps from ALOS PALSAR data (2007–2010).
+    Remote Sensing of Environment, 155, 13–31.
+  - Dynamic World — Google / World Resources Institute, CC BY 4.0.
+  - Digital terrain model — national 10 m gap-filled DTM of Romania.
+
+The input datasets themselves are not redistributed in this repository or in
+the associated Zenodo record.
+
+## No warranty
+
+The products are provided as is, without warranty of any kind. They are model
+predictions carrying substantial uncertainty, documented in the accompanying
+publication, and are not a substitute for field measurement.

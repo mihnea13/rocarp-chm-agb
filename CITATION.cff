@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "RoCarp-CHM-AGB: canopy height and aboveground biomass of the Romanian Carpathian forests at 10 m"
+abstract: >-
+  Wall-to-wall 10 m maps of forest canopy height and aboveground biomass across
+  the Romanian Carpathian arc, produced by machine-learning models calibrated
+  against NASA GEDI spaceborne LiDAR and applied to a multi-source predictor
+  stack of Sentinel-1, Sentinel-2, ALOS-2 PALSAR-2 and terrain data. Each product
+  is distributed with an explicit model-initialisation uncertainty layer.
+type: dataset
+version: "0.1.0-pre"
+license: CC-BY-4.0
+url: "https://GITHUB-USER.github.io/rocarp-chm-agb/"
+repository-code: "https://github.com/GITHUB-USER/rocarp-chm-agb"
+keywords:
+  - canopy height
+  - aboveground biomass
+  - GEDI
+  - Sentinel-1
+  - Sentinel-2
+  - PALSAR-2
+  - forest structure
+  - Carpathians
+  - Romania
+  - machine learning
+authors:
+  - family-names: "Cățeanu"
+    given-names: "Mihnea"
+    orcid: "https://orcid.org/0000-0002-3692-1050"
+    email: "cateanu.mihnea@unitbv.ro"
+    affiliation: "Transilvania University of Brașov, Faculty of Silviculture and Forest Engineering, Department of Forest Engineering, Brașov, Romania"
+  - family-names: "Oniga"
+    given-names: "Valeria-Ersilia"
+    orcid: "https://orcid.org/0000-0001-5433-2201"
+    affiliation: "Technical University Gheorghe Asachi of Iași, Department of Land Surveying and Cadastre, Iași, Romania"

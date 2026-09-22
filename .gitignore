@@ -1,0 +1,22 @@
+# Data products are distributed via Zenodo, never committed here
+data/*.tif
+data/*.tiff
+data/*.vrt
+data/*.aux.xml
+*.zip
+*.tar.gz
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# QR output (regenerate with tools/make_qr.py)
+qr/

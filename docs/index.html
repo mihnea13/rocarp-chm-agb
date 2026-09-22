@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RoCarp-CHM-AGB — Canopy height and biomass of the Romanian Carpathian forests</title>
+<meta name="description" content="Wall-to-wall 10 m canopy height and aboveground biomass maps of the Romanian Carpathian forests, calibrated against NASA GEDI spaceborne LiDAR. Release expected Q1 2027.">
+<meta property="og:title" content="RoCarp-CHM-AGB">
+<meta property="og:description" content="10 m canopy height and aboveground biomass of the Romanian Carpathian forests. Release expected Q1 2027.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌲</text></svg>">
+<style>
+:root{
+  --bg:#fbfaf7; --surface:#ffffff; --line:#e4e0d8; --line-soft:#efece5;
+  --ink:#1b1f1c; --ink-2:#4a5450; --ink-3:#7b857f;
+  --accent:#1f5f3f; --accent-soft:#e8f1eb; --accent-ink:#164a30;
+  --warn:#8a5a10; --warn-soft:#fbf1dc;
+  --radius:14px; --maxw:760px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#12140f; --surface:#1a1d18; --line:#2e332b; --line-soft:#23271f;
+    --ink:#eef0ea; --ink-2:#b4bcb2; --ink-3:#848d82;
+    --accent:#7bc49a; --accent-soft:#1c2b22; --accent-ink:#9ad6b4;
+    --warn:#e0b169; --warn-soft:#2a2316;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#12140f; --surface:#1a1d18; --line:#2e332b; --line-soft:#23271f;
+  --ink:#eef0ea; --ink-2:#b4bcb2; --ink-3:#848d82;
+  --accent:#7bc49a; --accent-soft:#1c2b22; --accent-ink:#9ad6b4;
+  --warn:#e0b169; --warn-soft:#2a2316;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font:400 17px/1.62 ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 16px}
+a{color:var(--accent-ink); text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1px}
+a:hover{text-decoration-thickness:2px}
+
+/* ---------- header ---------- */
+header{padding:42px 0 26px; border-bottom:1px solid var(--line)}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:12.5px; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--warn); background:var(--warn-soft);
+  padding:5px 11px; border-radius:999px; margin-bottom:18px;
+}
+.dot{width:6px; height:6px; border-radius:50%; background:currentColor; flex:none}
+h1{
+  margin:0 0 10px; font-size:clamp(30px,7.4vw,44px); line-height:1.12;
+  letter-spacing:-.022em; font-weight:700;
+}
+.sub{margin:0; font-size:clamp(17px,3.6vw,20px); line-height:1.42; color:var(--ink-2); font-weight:400; max-width:34em}
+
+/* ---------- sections ---------- */
+section{padding:32px 0; border-bottom:1px solid var(--line-soft)}
+section:last-of-type{border-bottom:0}
+h2{
+  margin:0 0 14px; font-size:13px; font-weight:700; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+h3{margin:22px 0 6px; font-size:17px; font-weight:650; letter-spacing:-.006em}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+.lead{font-size:18.5px; line-height:1.58}
+
+/* ---------- callout ---------- */
+.callout{
+  background:var(--accent-soft); border:1px solid var(--line);
+  border-radius:var(--radius); padding:18px 20px; margin:26px 0 0;
+}
+.callout p{font-size:16px; color:var(--ink-2)}
+.callout strong{color:var(--ink)}
+
+/* ---------- spec list ---------- */
+dl.spec{margin:0; border-top:1px solid var(--line-soft)}
+dl.spec>div{
+  display:grid; grid-template-columns:minmax(150px,34%) 1fr; gap:4px 20px;
+  padding:11px 0; border-bottom:1px solid var(--line-soft);
+}
+dl.spec dt{font-size:14.5px; color:var(--ink-3); font-weight:500}
+dl.spec dd{margin:0; font-size:15.5px}
+@media (max-width:540px){
+  dl.spec>div{grid-template-columns:1fr; gap:1px; padding:12px 0}
+  dl.spec dt{font-size:13px; letter-spacing:.02em}
+}
+code,kbd{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.9em; background:var(--line-soft); padding:1.5px 5px; border-radius:5px;
+}
+
+/* ---------- timeline ---------- */
+ol.tl{list-style:none; margin:0; padding:0}
+ol.tl li{
+  position:relative; padding:0 0 20px 26px; border-left:2px solid var(--line);
+  margin-left:5px;
+}
+ol.tl li:last-child{padding-bottom:0; border-left-color:transparent}
+ol.tl li::before{
+  content:""; position:absolute; left:-7px; top:6px; width:12px; height:12px;
+  border-radius:50%; background:var(--bg); border:2px solid var(--line);
+}
+ol.tl li.done::before{background:var(--accent); border-color:var(--accent)}
+.tl-when{display:block; font-size:13px; font-weight:650; color:var(--ink-3); letter-spacing:.03em; text-transform:uppercase; margin-bottom:1px}
+.tl-what{font-size:16px}
+
+/* ---------- sources ---------- */
+ul.src{list-style:none; margin:0; padding:0}
+ul.src li{padding:9px 0; border-bottom:1px solid var(--line-soft); font-size:15.5px; color:var(--ink-2)}
+ul.src li:last-child{border-bottom:0}
+ul.src b{color:var(--ink); font-weight:600}
+
+/* ---------- citation ---------- */
+.cite{position:relative; background:var(--surface); border:1px solid var(--line); border-radius:var(--radius); padding:16px 18px; margin-top:6px}
+.cite pre{
+  margin:0; font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:13.5px; line-height:1.62; white-space:pre-wrap; word-break:break-word; color:var(--ink-2);
+}
+button.copy{
+  margin-top:12px; font:inherit; font-size:13.5px; font-weight:600;
+  color:var(--accent-ink); background:var(--accent-soft);
+  border:1px solid var(--line); border-radius:8px; padding:6px 13px; cursor:pointer;
+}
+button.copy:hover{filter:brightness(.97)}
+
+/* ---------- authors ---------- */
+.author{padding:14px 0; border-bottom:1px solid var(--line-soft)}
+.author:last-of-type{border-bottom:0}
+.author .name{font-size:17px; font-weight:650}
+.author .orcid{font-size:14px}
+.author .aff{font-size:14.5px; color:var(--ink-2); line-height:1.5; margin-top:3px}
+.corr{font-size:14.5px; color:var(--ink-3); margin-top:14px}
+
+/* ---------- actions ---------- */
+.actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:4px}
+.btn{
+  display:inline-block; font-size:15.5px; font-weight:600; text-decoration:none;
+  padding:11px 18px; border-radius:10px; border:1px solid var(--line);
+  background:var(--surface); color:var(--ink);
+}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+:root[data-theme="dark"] .btn.primary,
+:root:not([data-theme="light"]) .btn.primary{color:#0e1510}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
+.btn:hover{filter:brightness(.97)}
+
+footer{padding:30px 0 46px; font-size:14px; color:var(--ink-3); border-top:1px solid var(--line)}
+footer p{margin:0 0 6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <span class="eyebrow"><span class="dot"></span>In preparation · release Q1 2027</span>
+  <h1>RoCarp-CHM-AGB</h1>
+  <p class="sub">Canopy height and aboveground biomass of the Romanian Carpathian forests, wall to wall, at 10 m resolution.</p>
+</header>
+
+<section>
+  <p class="lead">RoCarp-CHM-AGB maps two forest structural variables — <strong>canopy height</strong> and <strong>aboveground biomass</strong> — across the forests of the Romanian Carpathian arc at 10 m resolution.</p>
+  <p>The maps are produced by machine-learning models calibrated against spaceborne LiDAR from NASA's GEDI mission and applied to a predictor stack that combines optical imagery, C-band and L-band radar, and terrain data. Each map carries an explicit uncertainty layer, so that the reproducible signal can be separated from the component that depends on the training procedure alone.</p>
+
+  <div class="callout">
+    <p><strong>The data are not yet public.</strong> They will be deposited on Zenodo under a permanent DOI, together with the peer-reviewed publication, in the first quarter of 2027. This page is the entry point — the download link and the DOI will appear here. Nothing else needs to be bookmarked.</p>
+  </div>
+
+  <div class="actions" style="margin-top:22px">
+    <a class="btn primary" href="https://github.com/GITHUB-USER/rocarp-chm-agb">Repository on GitHub</a>
+    <a class="btn" href="mailto:cateanu.mihnea@unitbv.ro">Contact the authors</a>
+  </div>
+</section>
+
+<section>
+  <h2>Dataset specification</h2>
+  <dl class="spec">
+    <div><dt>Variables</dt><dd>Canopy height (m); aboveground biomass (Mg ha⁻¹)</dd></div>
+    <div><dt>Resolution</dt><dd>10 m</dd></div>
+    <div><dt>Reference system</dt><dd>EPSG:32635 — WGS 84 / UTM zone 35N</dd></div>
+    <div><dt>Extent</dt><dd>Forests of the Romanian Carpathian arc</dd></div>
+    <div><dt>Format</dt><dd>Cloud-Optimized GeoTIFF, <code>NaN</code> no-data</dd></div>
+    <div><dt>Bands</dt><dd>1 — reference prediction<br>2 — ensemble mean<br>3 — ensemble standard deviation</dd></div>
+    <div><dt>Reference period</dt><dd>2024–2025</dd></div>
+    <div><dt>Forest definition</dt><dd>Dynamic World derived forest mask</dd></div>
+    <div><dt>Licence</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd></div>
+  </dl>
+  <p style="margin-top:16px; font-size:14.5px; color:var(--ink-3)">Provisional. Details may change before release.</p>
+
+  <h3>On the uncertainty layer</h3>
+  <p>Band 1 is the prediction of a single canonical model. Band 2 is the mean of ten models differing only in the random seed; band 3 is the dispersion between them. Band 3 therefore quantifies model-initialisation variance and nothing else — it is not a prediction interval, and it is considerably smaller than the cross-validated error of the same model.</p>
+</section>
+
+<section>
+  <h2>Method</h2>
+  <ol style="margin:0; padding-left:1.25em">
+    <li style="margin-bottom:9px"><strong>Reference data.</strong> GEDI L2A and L4A footprints, quality-filtered, with footprint geolocation refined against a high-resolution digital terrain model.</li>
+    <li style="margin-bottom:9px"><strong>Predictors.</strong> Seasonal Sentinel-2 composites and vegetation indices; Sentinel-1 C-band backscatter; ALOS-2 PALSAR-2 L-band annual mosaic; elevation, slope and aspect from a national 10 m terrain model.</li>
+    <li style="margin-bottom:9px"><strong>Feature selection.</strong> Recursive feature elimination with cross-validation over the full multi-source stack.</li>
+    <li style="margin-bottom:9px"><strong>Training.</strong> Spatially blocked cross-validation on a 30 × 30 km grid, hyperparameters tuned by Optuna, ten seed replicates per final model.</li>
+    <li><strong>Prediction.</strong> Block-wise application to the full raster stack, restricted to the forest mask.</li>
+  </ol>
+  <p style="margin-top:16px">The complete methodological description will accompany the publication.</p>
+</section>
+
+<section>
+  <h2>Data sources</h2>
+  <ul class="src">
+    <li><b>GEDI L2A / L4A</b> — NASA Global Ecosystem Dynamics Investigation, LP DAAC and ORNL DAAC</li>
+    <li><b>Sentinel-1 and Sentinel-2</b> — modified Copernicus Sentinel data (2024–2025), processed by the authors</li>
+    <li><b>ALOS-2 PALSAR-2 yearly mosaic</b> — © JAXA/METI; cite Shimada et al. (2014)</li>
+    <li><b>Dynamic World</b> — Google / World Resources Institute, CC BY 4.0</li>
+    <li><b>Digital terrain model</b> — national 10 m gap-filled DTM of Romania</li>
+  </ul>
+  <p style="margin-top:16px">The predictor stack itself is not redistributed. Only the derived canopy height and biomass products are released, together with the code needed to reproduce them from the original sources.</p>
+</section>
+
+<section>
+  <h2>Release plan</h2>
+  <ol class="tl">
+    <li class="done"><span class="tl-when">2026</span><span class="tl-what">Dataset description and specification published</span></li>
+    <li><span class="tl-when">Q1 2027</span><span class="tl-what">Peer-reviewed publication</span></li>
+    <li><span class="tl-when">Q1 2027</span><span class="tl-what">Raster products on Zenodo, under a permanent DOI</span></li>
+    <li><span class="tl-when">Q1 2027</span><span class="tl-what">Processing code released</span></li>
+  </ol>
+</section>
+
+<section>
+  <h2>How to cite</h2>
+  <p style="font-size:15.5px; color:var(--ink-2)">The dataset DOI will be minted on release. Until then, please cite this repository.</p>
+  <div class="cite">
+    <pre id="citation">Cățeanu, M. &amp; Oniga, V.-E. (2027). RoCarp-CHM-AGB: canopy height and
+aboveground biomass of the Romanian Carpathian forests at 10 m
+[Data set]. Zenodo. https://doi.org/10.5281/zenodo.XXXXXXX</pre>
+    <button class="copy" id="copyBtn" type="button">Copy citation</button>
+  </div>
+</section>
+
+<section>
+  <h2>Authors</h2>
+  <div class="author">
+    <div class="name">Mihnea Cățeanu</div>
+    <div class="orcid"><a href="https://orcid.org/0000-0002-3692-1050">ORCID 0000-0002-3692-1050</a></div>
+    <div class="aff">Department of Forest Engineering, Faculty of Silviculture and Forest Engineering, Transilvania University of Brașov, Brașov, Romania · Faculty of Geodesy, Technical University of Civil Engineering Bucharest, Bucharest, Romania</div>
+  </div>
+  <div class="author">
+    <div class="name">Valeria-Ersilia Oniga</div>
+    <div class="orcid"><a href="https://orcid.org/0000-0001-5433-2201">ORCID 0000-0001-5433-2201</a></div>
+    <div class="aff">Department of Land Surveying and Cadastre, Technical University „Gheorghe Asachi” of Iași, D. Mangeron Street, Iași, Romania · Faculty of Geodesy, Technical University of Civil Engineering Bucharest, Bucharest, Romania · Romanian Society of Photogrammetry and Remote Sensing, Lacul Tei Blvd. 124, 020396 Bucharest, Romania</div>
+  </div>
+  <p class="corr">Corresponding author: <a href="mailto:cateanu.mihnea@unitbv.ro">cateanu.mihnea@unitbv.ro</a></p>
+</section>
+
+<footer>
+  <p>Data products licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Code licensed under MIT.</p>
+  <p><a href="https://github.com/GITHUB-USER/rocarp-chm-agb">github.com/GITHUB-USER/rocarp-chm-agb</a></p>
+</footer>
+
+</div>
+<script>
+document.getElementById('copyBtn').addEventListener('click', function(){
+  var t = document.getElementById('citation').innerText;
+  var btn = this;
+  var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy citation'; }, 1800); };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(t).then(done, function(){ btn.textContent = 'Select and copy manually'; });
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = t; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch(e){ btn.textContent = 'Select and copy manually'; }
+    document.body.removeChild(ta);
+  }
+});
+</script>
+</body>
+</html>
