@@ -22,9 +22,9 @@ from **NASA GEDI** (L2A relative height metrics for canopy height, L4A for above
 biomass density) and applied to a multi-source predictor stack combining optical,
 C-band SAR, L-band SAR and terrain data.
 
-Every map is distributed with an explicit uncertainty layer, so that users can
-distinguish the reproducible signal from the component that depends on the training
-procedure alone.
+The CatBoost product is distributed with a per-pixel predictive uncertainty layer
+estimated by the model itself, so that users can tell where the prediction is well
+constrained and where it is not.
 
 ## Dataset specification
 
@@ -38,16 +38,18 @@ procedure alone.
 | **Extent** | Forests of the Romanian Carpathian arc |
 | **Format** | Cloud-Optimized GeoTIFF (COG) † |
 | **No-data** | NaN |
-| **Bands per product** | 1 — reference prediction · 2 — ensemble mean · 3 — ensemble standard deviation |
-| **Reference period** | 2024–2025 † |
+| **Bands per product** | 1 — predicted value · 2 — predictive standard deviation (CatBoost product only) |
+| **Reference period** | 2025 |
 | **Forest definition** | Dynamic World derived forest mask |
 | **Model families** | Random forest, XGBoost, CatBoost, convolutional neural network † |
 
-The three-band structure is deliberate. Band 1 is the prediction of a single canonical
-model; band 2 is the mean of ten models differing only in the random seed; band 3 is
-the dispersion between them. Band 3 quantifies model-initialisation variance only — it
-is not a prediction interval, and it is substantially smaller than the cross-validated
-error of the same model.
+The CatBoost product carries a second band with the model's own predictive standard
+deviation, obtained from a gradient-boosted model fitted with a heteroscedastic loss.
+It estimates the dispersion the model assigns to each individual prediction, and is
+therefore spatially informative rather than constant. It is not a complete prediction
+interval: it excludes the reference-data uncertainty of the GEDI footprint estimates,
+the geolocation error propagated into predictor extraction, and the structural error of
+the model family.
 
 ## Method, in brief
 
@@ -57,11 +59,11 @@ error of the same model.
 2. **Predictors.** Seasonal Sentinel-2 surface reflectance composites and derived
    vegetation indices; Sentinel-1 C-band backscatter; JAXA ALOS-2 PALSAR-2 L-band
    annual mosaic (HH, HV and dual-polarisation indices); elevation, slope and aspect
-   from a national 10 m digital terrain model.
+   derived from the ANCPI digital terrain model of Romania.
 3. **Feature selection.** Recursive feature elimination with cross-validation over the
    full multi-source stack.
 4. **Model training.** Spatially blocked cross-validation on a 30 × 30 km block grid,
-   with hyperparameters tuned by Optuna; ten seed replicates per final model.
+   with hyperparameters tuned by Optuna.
 5. **Prediction.** Block-wise application of the trained models to the full raster
    stack, restricted to the forest mask.
 
@@ -78,7 +80,9 @@ Use of this dataset carries the attribution requirements of its inputs:
 - **ALOS-2 PALSAR-2 yearly mosaic** — © JAXA/METI. Please cite Shimada et al. (2014),
   *Remote Sensing of Environment* 155, 13–31, as requested by the data provider.
 - **Dynamic World** — Google / World Resources Institute, CC BY 4.0.
-- **Digital terrain model** — national 10 m gap-filled DTM of Romania.
+- **Digital terrain model** — digital terrain model of Romania at 1, 5 and 10 m
+  resolution, distributed through the ANCPI geoportal; gap-filled and resampled to
+  10 m by the authors.
 
 The predictor stack itself is **not** redistributed here. Only the derived canopy
 height and biomass products are released, together with the code needed to reproduce

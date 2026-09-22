@@ -30,7 +30,9 @@ requirements pass through to any use of this dataset:
     New global forest/non-forest maps from ALOS PALSAR data (2007–2010).
     Remote Sensing of Environment, 155, 13–31.
   - Dynamic World — Google / World Resources Institute, CC BY 4.0.
-  - Digital terrain model — national 10 m gap-filled DTM of Romania.
+  - Digital terrain model — digital terrain model of Romania at 1, 5 and 10 m
+    resolution, distributed through the ANCPI geoportal; gap-filled and resampled
+    to 10 m by the authors.
 
 The input datasets themselves are not redistributed in this repository or in
 the associated Zenodo record.

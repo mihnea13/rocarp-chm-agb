@@ -164,7 +164,7 @@ footer p{margin:0 0 6px}
 
 <section>
   <p class="lead">RoCarp-CHM-AGB maps two forest structural variables — <strong>canopy height</strong> and <strong>aboveground biomass</strong> — across the forests of the Romanian Carpathian arc at 10 m resolution.</p>
-  <p>The maps are produced by machine-learning models calibrated against spaceborne LiDAR from NASA's GEDI mission and applied to a predictor stack that combines optical imagery, C-band and L-band radar, and terrain data. Each map carries an explicit uncertainty layer, so that the reproducible signal can be separated from the component that depends on the training procedure alone.</p>
+  <p>The maps are produced by machine-learning models calibrated against spaceborne LiDAR from NASA's GEDI mission and applied to a predictor stack that combines optical imagery, C-band and L-band radar, and terrain data. The CatBoost product carries a per-pixel predictive uncertainty layer estimated by the model itself, so that users can tell where the prediction is well constrained and where it is not.</p>
 
   <div class="callout">
     <p><strong>The data are not yet public.</strong> They will be deposited on Zenodo under a permanent DOI, together with the peer-reviewed publication, in the first quarter of 2027. This page is the entry point — the download link and the DOI will appear here. Nothing else needs to be bookmarked.</p>
@@ -184,24 +184,25 @@ footer p{margin:0 0 6px}
     <div><dt>Reference system</dt><dd>EPSG:32635 — WGS 84 / UTM zone 35N</dd></div>
     <div><dt>Extent</dt><dd>Forests of the Romanian Carpathian arc</dd></div>
     <div><dt>Format</dt><dd>Cloud-Optimized GeoTIFF, <code>NaN</code> no-data</dd></div>
-    <div><dt>Bands</dt><dd>1 — reference prediction<br>2 — ensemble mean<br>3 — ensemble standard deviation</dd></div>
-    <div><dt>Reference period</dt><dd>2024–2025</dd></div>
+    <div><dt>Bands</dt><dd>1 — predicted value<br>2 — predictive standard deviation <span style="color:var(--ink-3)">(CatBoost product only)</span></dd></div>
+    <div><dt>Reference period</dt><dd>2025</dd></div>
     <div><dt>Forest definition</dt><dd>Dynamic World derived forest mask</dd></div>
     <div><dt>Licence</dt><dd><a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></dd></div>
   </dl>
   <p style="margin-top:16px; font-size:14.5px; color:var(--ink-3)">Provisional. Details may change before release.</p>
 
   <h3>On the uncertainty layer</h3>
-  <p>Band 1 is the prediction of a single canonical model. Band 2 is the mean of ten models differing only in the random seed; band 3 is the dispersion between them. Band 3 therefore quantifies model-initialisation variance and nothing else — it is not a prediction interval, and it is considerably smaller than the cross-validated error of the same model.</p>
+  <p>The CatBoost product carries a second band with the model’s own predictive standard deviation, obtained from a gradient-boosted model fitted with a heteroscedastic loss. It estimates the dispersion the model assigns to each individual prediction, and is therefore spatially informative rather than constant.</p>
+  <p>It is not a complete prediction interval: it excludes the reference-data uncertainty of the GEDI footprint estimates, the geolocation error propagated into predictor extraction, and the structural error of the model family.</p>
 </section>
 
 <section>
   <h2>Method</h2>
   <ol style="margin:0; padding-left:1.25em">
     <li style="margin-bottom:9px"><strong>Reference data.</strong> GEDI L2A and L4A footprints, quality-filtered, with footprint geolocation refined against a high-resolution digital terrain model.</li>
-    <li style="margin-bottom:9px"><strong>Predictors.</strong> Seasonal Sentinel-2 composites and vegetation indices; Sentinel-1 C-band backscatter; ALOS-2 PALSAR-2 L-band annual mosaic; elevation, slope and aspect from a national 10 m terrain model.</li>
+    <li style="margin-bottom:9px"><strong>Predictors.</strong> Seasonal Sentinel-2 composites and vegetation indices; Sentinel-1 C-band backscatter; ALOS-2 PALSAR-2 L-band annual mosaic; elevation, slope and aspect derived from the ANCPI digital terrain model of Romania.</li>
     <li style="margin-bottom:9px"><strong>Feature selection.</strong> Recursive feature elimination with cross-validation over the full multi-source stack.</li>
-    <li style="margin-bottom:9px"><strong>Training.</strong> Spatially blocked cross-validation on a 30 × 30 km grid, hyperparameters tuned by Optuna, ten seed replicates per final model.</li>
+    <li style="margin-bottom:9px"><strong>Training.</strong> Spatially blocked cross-validation on a 30 × 30 km grid, hyperparameters tuned by Optuna.</li>
     <li><strong>Prediction.</strong> Block-wise application to the full raster stack, restricted to the forest mask.</li>
   </ol>
   <p style="margin-top:16px">The complete methodological description will accompany the publication.</p>
@@ -214,7 +215,7 @@ footer p{margin:0 0 6px}
     <li><b>Sentinel-1 and Sentinel-2</b> — modified Copernicus Sentinel data (2024–2025), processed by the authors</li>
     <li><b>ALOS-2 PALSAR-2 yearly mosaic</b> — © JAXA/METI; cite Shimada et al. (2014)</li>
     <li><b>Dynamic World</b> — Google / World Resources Institute, CC BY 4.0</li>
-    <li><b>Digital terrain model</b> — national 10 m gap-filled DTM of Romania</li>
+    <li><b>Digital terrain model</b> — Romania, 1 / 5 / 10 m, distributed through the ANCPI geoportal; gap-filled and resampled to 10 m by the authors</li>
   </ul>
   <p style="margin-top:16px">The predictor stack itself is not redistributed. Only the derived canopy height and biomass products are released, together with the code needed to reproduce them from the original sources.</p>
 </section>

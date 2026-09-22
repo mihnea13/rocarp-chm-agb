@@ -5,8 +5,8 @@ abstract: >-
   Wall-to-wall 10 m maps of forest canopy height and aboveground biomass across
   the Romanian Carpathian arc, produced by machine-learning models calibrated
   against NASA GEDI spaceborne LiDAR and applied to a multi-source predictor
-  stack of Sentinel-1, Sentinel-2, ALOS-2 PALSAR-2 and terrain data. Each product
-  is distributed with an explicit model-initialisation uncertainty layer.
+  stack of Sentinel-1, Sentinel-2, ALOS-2 PALSAR-2 and terrain data. The CatBoost
+  product carries a per-pixel predictive uncertainty layer estimated by the model.
 type: dataset
 version: "0.1.0-pre"
 license: CC-BY-4.0
